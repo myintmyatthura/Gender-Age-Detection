@@ -1,12 +1,12 @@
 import os
 import requests
-from demographics import demographics, socio_demographics
+from demographics import demographics, socio_demographics, rich_poor
 
 # Define Stability AI authorization token
 STABILITY_API_KEY = "Bearer sk-V1ygLEPtCtOTtMZc4D6zCrZWJk4mI1MJd82MiFEn3QV2iczK"
 
 # Define the output directory
-output_dir = "stable_seed_images_demographic"
+output_dir = "richPoor_seed_images_demographic"
 
 # Create the output directory if it doesn't exist
 if not os.path.exists(output_dir):
@@ -16,7 +16,8 @@ if not os.path.exists(output_dir):
 print("Choose the type of image generation:")
 print("1. Normal demographic array with passport-style prompt")
 print("2. Socioeconomic demographic array with street-style prompt")
-choice = input("Enter your choice (1 or 2): ").strip()
+print("3. Richest and Poorest array with street-style prompt")
+choice = input("Enter your choice (1, 2 or 3): ").strip()
 
 if choice == "1":
     for race, gender, age in demographics:
@@ -84,6 +85,39 @@ elif choice == "2":
             print(f"Saved: {file_name}")
         else:
             print(f"Error generating image for {country}, {gender}: {response.json()}")
+elif choice == "3":
+    for country, gender in rich_poor:
+        # Street-style prompt
+        prompt = (
+            f"A person standing in the streets of {country}, with a neutral expression, "
+            f"background should be moderately detailed and not be blurred at all, and it should "
+            f"be a street view of the country and not random backgrounds, with bright, even lighting. "
+            f"The person should be facing the camera directly at all times without any turns in the face."
+            f"Don't use the same coloring style for every country, the background colors and scenary should be an accurate representation of the country, etc."
+        )
 
+        # Generate image using Stability AI API
+        response = requests.post(
+            "https://api.stability.ai/v2beta/stable-image/generate/core",
+            headers={
+                "authorization": STABILITY_API_KEY,
+                "accept": "image/*",
+            },
+            files={"none": ''},
+            data={
+                "prompt": prompt,
+                "output_format": "jpeg",
+            },
+        )
+
+        numbering = 1 if gender == "Male" else 2
+        # Save the image if the response is successful
+        if response.status_code == 200:
+            file_name = f"{output_dir}/RP_{country}_{numbering}.jpeg"
+            with open(file_name, "wb") as file:
+                file.write(response.content)
+            print(f"Saved: {file_name}")
+        else:
+            print(f"Error generating image for {country}, {gender}: {response.json()}")
 else:
     print("Invalid choice. Please run the program again and select either 1 or 2.")
