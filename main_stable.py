@@ -58,7 +58,7 @@ elif choice == "2":
             f"background should be moderately detailed and not be blurred at all, and it should "
             f"be a street view of the country and not random backgrounds, with bright, even lighting. "
             f"The person should be facing the camera directly at all times without any turns in the face."
-            f"Don't use the same coloring style for every country, the background colors and scenary should be an accurate representation of the country.', etc."
+            f"Don't use the same coloring style for every country, the background colors and scenary should be an accurate representation of the country, etc."
         )
 
         # Generate image using Stability AI API
