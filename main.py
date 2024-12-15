@@ -48,7 +48,7 @@ if choice == "1":
 elif choice == "2":
     for country, gender in socio_demographics:
         # New prompt
-        prompt = f"A {gender.lower()} person standing in the streets of {country}, with a neutral expression, background should be moderately detailed and not be blurred at all and it should be a street view of the country and not random backgrounds., and bright even lighting. The person should be facing the camera directly at all times without any turns in the face."
+        prompt = f"A person standing in the streets of {country}, with a neutral expression, background should be moderately detailed and not be blurred at all and it should be a street view of the country and not random backgrounds., and bright even lighting. The person should be facing the camera directly at all times without any turns in the face."
         
         # Generate the image
         response = client.images.generate(
