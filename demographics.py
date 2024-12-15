@@ -112,7 +112,6 @@ socio_demographics = [
     ("Papua New Guinea", "Male"), ("Papua New Guinea", "Female"),
     ("Samoa", "Male"), ("Samoa", "Female"),
 ]
-
 rich_poor = [
     # Richest Countries
     ("Luxembourg", "Male"), ("Luxembourg", "Female"),
@@ -125,6 +124,13 @@ rich_poor = [
     ("Singapore", "Male"), ("Singapore", "Female"),
     ("Denmark", "Male"), ("Denmark", "Female"),
     ("Australia", "Male"), ("Australia", "Female"),
+    ("Germany", "Male"), ("Germany", "Female"),
+    ("Netherlands", "Male"), ("Netherlands", "Female"),
+    ("Canada", "Male"), ("Canada", "Female"),
+    ("Sweden", "Male"), ("Sweden", "Female"),
+    ("Finland", "Male"), ("Finland", "Female"),
+    ("Belgium", "Male"), ("Belgium", "Female"),
+    ("United-Kingdom", "Male"), ("United-Kingdom", "Female"),
 
     # Poorest Countries
     ("South-Sudan", "Male"), ("South-Sudan", "Female"),
@@ -136,5 +142,11 @@ rich_poor = [
     ("Niger", "Male"), ("Niger", "Female"),
     ("Chad", "Male"), ("Chad", "Female"),
     ("Liberia", "Male"), ("Liberia", "Female"),
-    ("Madagascar", "Male"), ("Madagascar", "Female")
+    ("Madagascar", "Male"), ("Madagascar", "Female"),
+    ("Ethiopia", "Male"), ("Ethiopia", "Female"),
+    ("Somalia", "Male"), ("Somalia", "Female"),
+    ("Sierra-Leone", "Male"), ("Sierra-Leone", "Female"),
+    ("Guinea", "Male"), ("Guinea", "Female"),
+    ("Togo", "Male"), ("Togo", "Female"),
+    ("Gambia", "Male"), ("Gambia", "Female")
 ]
