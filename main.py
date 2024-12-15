@@ -27,7 +27,7 @@ choice = input("Enter your choice (1 or 2): ").strip()
 if choice == "1":
     for race, gender, age in demographics:
         # Old prompt
-        prompt = f"A passport-style portrait of a {age.lower()} {race.lower()} {gender.lower()} with a neutral expression, no shadows on the face, bright, even lighting, and minimal background."
+        prompt = f"A passport-style portrait of a {age.lower()} {race.lower()} {gender.lower()} with a neutral expression, no shadows on the face, bright, even lighting, and minimal background. The background colors should match the country's theme, etc."
         
         # Generate the image
         response = client.images.generate(
@@ -48,7 +48,7 @@ if choice == "1":
 elif choice == "2":
     for country, gender in socio_demographics:
         # New prompt
-        prompt = f"A person standing in the streets of {country}, with a neutral expression, background should be moderately detailed and not be blurred at all and it should be a street view of the country and not random backgrounds., and bright even lighting. The person should be facing the camera directly at all times without any turns in the face."
+        prompt = f"A person standing in the streets of {country}, with a neutral expression, background should be moderately detailed and not be blurred at all and it should be a street view of the country and not random backgrounds and bright even lighting. The person should be facing the camera directly at all times without any turns in the face."
         
         # Generate the image
         response = client.images.generate(
@@ -58,10 +58,11 @@ elif choice == "2":
             response_format="url"
         )
         
+        numbering = 1 if gender == "Male" else 2
         # Save the image
         image_url = response.data[0].url
         image_data = requests.get(image_url).content
-        file_name = f"{socio_seed_images_path}/{country}_{gender}.png"
+        file_name = f"{socio_seed_images_path}/{country}_{numbering}.png"
         with open(file_name, "wb") as file:
             file.write(image_data)
         print(f"Saved: {file_name}")
