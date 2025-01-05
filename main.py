@@ -31,9 +31,11 @@ if choice == "1":
         
         # Generate the image
         response = client.images.generate(
+            model="dall-e-3",
+            quality="standard",
             prompt=prompt,
             n=1,
-            size="512x512",
+            size="1024x1024",
             response_format="url"
         )
         
@@ -49,18 +51,19 @@ elif choice == "2":
     for country, gender in socio_demographics:
         # New prompt
         prompt = (
-            f"A person standing in the streets of {country}, with a neutral expression facing straight at the camera, "
-            f"street background should be moderately detailed and not be blurred at all, and it should "
+            f"A realistic image of a person standing in the streets of {country}, with a neutral expression facing straight at the camera, "
+            f"street background should be moderately detailed with no blur, and it should "
             f"be a street view of the country and not random backgrounds, with bright, even lighting. "
             f"The person should be facing the camera directly at all times without any turns in the face."
-            f"Don't use the same coloring style for every country, the background colors and scenary should be an accurate representation of the country, etc."
         )
         
         # Generate the image
         response = client.images.generate(
+            model="dall-e-3",
+            quality="hd",
             prompt=prompt,
             n=1,
-            size="512x512",
+            size="1024x1024",
             response_format="url"
         )
         
