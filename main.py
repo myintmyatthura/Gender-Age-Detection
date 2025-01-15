@@ -57,7 +57,6 @@ elif choice == "2":
             f"The person should be facing the camera directly at all times without any turns in the face."
         )
         
-        
         # Generate the image
         response = client.images.generate(
             model="dall-e-3",
