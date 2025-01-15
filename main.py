@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 import requests
-from demographics import demographics, socio_demographics
+from demographics import demographics, socio_demographics, rich_poor
 
 
 # Initialize the OpenAI client
@@ -9,20 +9,23 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Define directories
 normal_seed_images_path = "seed_images"
-socio_seed_images_path = "socioeconomic_seed_images"
-
+socio_seed_images_path = "dallE_output"
+rich_poor_path = "rich_poor_DALLE"
 # Create folders if they don't exist
 if not os.path.exists(normal_seed_images_path):
     os.makedirs(normal_seed_images_path)
 if not os.path.exists(socio_seed_images_path):
     os.makedirs(socio_seed_images_path)
+if not os.path.exists(rich_poor_path):
+    os.makedirs(rich_poor_path)
 
 
 # Get user's choice
 print("Choose the type of image generation:")
 print("1. Normal demographic array with passport-style prompt")
 print("2. Socioeconomic demographic array with street-style prompt")
-choice = input("Enter your choice (1 or 2): ").strip()
+print("3. Richest and Poorest array with street-style prompt")
+choice = input("Enter your choice (1 or 2 or 3): ").strip()
 
 if choice == "1":
     for race, gender, age in demographics:
@@ -51,11 +54,11 @@ elif choice == "2":
     for country, gender in socio_demographics:
         # New prompt
         prompt = (
-            f"A realistic image of a person standing in the streets of {country}, with a neutral expression facing straight at the camera, "
-            f"street background should be moderately detailed with no blur, and it should "
+            f"A realistic image of a person from the waist-up standing in the streets of {country}, looking at the camera with any expression. The person must be from the waist up."
+            f"Street background should be extremely detailed with no blur, and it should "
             f"be a street view of the country and not random backgrounds, with bright, even lighting. "
-            f"The person should be facing the camera directly at all times without any turns in the face."
         )
+        
         
         # Generate the image
         response = client.images.generate(
@@ -75,6 +78,34 @@ elif choice == "2":
         with open(file_name, "wb") as file:
             file.write(image_data)
         print(f"Saved: {file_name}")
+        
+elif choice == "3":
+    for country, gender in rich_poor:
+        # New prompt
+        prompt = (
+            f"A realistic image of a person from the waist-up standing in the streets of {country}, looking at the camera with any expression. The person must be from the waist up."
+            f"Street background should be extremely detailed with no blur, and it should "
+            f"be a street view of the country and not random backgrounds, with bright, even lighting. "
+        )
+        print(f"Now working on {country}")
+        # Generate the image
+        response = client.images.generate(
+            model="dall-e-3",
+            quality="hd",
+            prompt=prompt,
+            n=1,
+            size="1024x1024",
+            response_format="url"
+        )
+        
+        numbering = 1 if gender == "Male" else 2
+        # Save the image
+        image_url = response.data[0].url
+        image_data = requests.get(image_url).content
+        file_name = f"{rich_poor_path}/{country}_{numbering}.png"
+        with open(file_name, "wb") as file:
+            file.write(image_data)
+        print(f"Saved: {file_name}")
 
 else:
-    print("Invalid choice. Please run the program again and select either 1 or 2.")
+    print("Invalid choice. Please run the program again and select either 1 or 2 or 3.")
