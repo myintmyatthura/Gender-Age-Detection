@@ -54,7 +54,7 @@ elif choice == "2":
     for country, gender in socio_demographics:
         # New prompt
         prompt = (
-            f"A realistic image of a person from the waist-up standing in the streets of {country}, looking at the camera with any expression. The person must be from the waist up."
+            f"A realistic image of a {gender} person from the waist-up standing in the streets of {country}, looking at the camera with any expression. The person must be from the waist up."
             f"Street background should be extremely detailed with no blur, and it should "
             f"be a street view of the country and not random backgrounds, with bright, even lighting. "
         )
@@ -83,10 +83,11 @@ elif choice == "3":
     for country, gender in rich_poor:
         # New prompt
         prompt = (
-            f"A realistic image of a person from the waist-up standing in the streets of {country}, looking at the camera with any expression. The person must be from the waist up."
+            f"A realistic image of a {gender} person from the waist-up standing in the streets of {country}, looking at the camera with any expression. The person must be from the waist up."
             f"Street background should be extremely detailed with no blur, and it should "
             f"be a street view of the country and not random backgrounds, with bright, even lighting. "
         )
+        
         print(f"Now working on {country}")
         # Generate the image
         response = client.images.generate(

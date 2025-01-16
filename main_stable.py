@@ -54,7 +54,7 @@ elif choice == "2":
     for country, gender in socio_demographics:
         # Street-style prompt
         prompt = (
-            f"A realistic image of a person standing in the streets of {country}, looking at the camera with any expression."
+            f"A realistic image of a {gender} person standing in the streets of {country}, looking at the camera with any expression."
             f"Street background should be extremely detailed with no blur, and it should "
             f"be a street view of the country and not random backgrounds, with bright, even lighting. "
         )
@@ -88,7 +88,7 @@ elif choice == "3":
     for country, gender in rich_poor:
         # Street-style prompt
         prompt = (
-            f"A realistic image of a person standing in the streets of {country}, looking at the camera with any expression."
+            f"A realistic image of a {gender} person standing in the streets of {country}, looking at the camera with any expression."
             f"Street background should be extremely detailed with no blur, and it should "
             f"be a street view of the country and not random backgrounds, with bright, even lighting. "
         )
