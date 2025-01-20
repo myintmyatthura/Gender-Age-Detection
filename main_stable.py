@@ -88,9 +88,9 @@ elif choice == "3":
     for country, gender in rich_poor:
         # Street-style prompt
         prompt = (
-            f"A realistic image of a {gender} person standing in the streets of {country}, facing the camera."
+            f"A realistic image of a {gender} person standing in the streets of {country}, looking at the camera with any expression."
             f"Street background should be extremely detailed with no blur, and it should "
-            f"be a street view of the country and not random backgrounds, during the day"
+            f"be a street view of the country and not random backgrounds, with bright, even lighting. "
         )
 
         # Generate image using Stability AI API
