@@ -128,7 +128,7 @@ rich_poor = [
     ("Netherlands", "Male"), ("Netherlands", "Female"),
     ("Canada", "Male"), ("Canada", "Female"),
     ("Sweden", "Male"), ("Sweden", "Female"),
-    ("Finland", "Male"), ("Finland", "Female"),
+    ("Malaysia", "Male"), ("Malaysia", "Female"),
 
     # Poorest Countries
     ("Burundi", "Male"), ("Burundi", "Female"),
