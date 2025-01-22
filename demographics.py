@@ -147,3 +147,24 @@ rich_poor = [
     ("Togo", "Male"), ("Togo", "Female"),
     ("Gambia", "Male"), ("Gambia", "Female")
 ]
+
+
+
+rich_only = [
+    # # Richest Countries
+    ("Luxembourg", "Male"), ("Luxembourg", "Female"),
+    ("Switzerland", "Male"), ("Switzerland", "Female"),
+    ("Norway", "Male"), ("Norway", "Female"),
+    ("Ireland", "Male"), ("Ireland", "Female"),
+    ("Qatar", "Male"), ("Qatar", "Female"),
+    ("Iceland", "Male"), ("Iceland", "Female"),
+    ("USA", "Male"), ("USA", "Female"),
+    ("Singapore", "Male"), ("Singapore", "Female"),
+    ("Denmark", "Male"), ("Denmark", "Female"),
+    ("Australia", "Male"), ("Australia", "Female"),
+    ("Germany", "Male"), ("Germany", "Female"),
+    ("Netherlands", "Male"), ("Netherlands", "Female"),
+    ("Canada", "Male"), ("Canada", "Female"),
+    ("Sweden", "Male"), ("Sweden", "Female"),
+    ("Malaysia", "Male"), ("Malaysia", "Female"),
+]
