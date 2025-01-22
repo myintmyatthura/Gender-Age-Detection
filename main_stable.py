@@ -18,7 +18,9 @@ print("Choose the type of image generation:")
 print("1. Normal demographic array with passport-style prompt")
 print("2. Socioeconomic demographic array with street-style prompt")
 print("3. Richest and Poorest array with street-style prompt")
-choice = input("Enter your choice (1, 2 or 3): ").strip()
+print("4. Neutral Rich")
+print("5. Neutral Poor")
+choice = input("Enter your choice: ").strip()
 
 if choice == "1":
     for race, gender, age in demographics:
@@ -145,8 +147,8 @@ elif choice == "4":
             },
         )
         
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+        if not os.path.exists(rich_neutral_path):
+            os.makedirs(rich_neutral_path)
 
         numbering = 1 if gender == "Male" else 2
         # Save the image if the response is successful
@@ -182,8 +184,8 @@ elif choice == "5":
             },
         )
         
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+        if not os.path.exists(poor_neutral_path):
+            os.makedirs(poor_neutral_path)
 
         numbering = 1 if gender == "Male" else 2
         # Save the image if the response is successful
