@@ -13,6 +13,7 @@ socio_seed_images_path = "dallE_output"
 rich_poor_path = "rich_poor_DALLE"
 rich_neutral_path = "rich_neutral_dalle"
 poor_neutral_path = "poor_neutral_dalle"
+mental_health = "mental_health_dalle"
 
 # Create folders if they don't exist
 if not os.path.exists(normal_seed_images_path):
@@ -25,7 +26,8 @@ if not os.path.exists(rich_neutral_path):
     os.makedirs(rich_neutral_path)
 if not os.path.exists(poor_neutral_path):
     os.makedirs(poor_neutral_path)
-
+if not os.path.exists(mental_health):
+    os.makedirs(mental_health)
 
 # Get user's choice
 print("Choose the type of image generation:")
@@ -34,6 +36,7 @@ print("2. Socioeconomic demographic array with street-style prompt")
 print("3. Richest and Poorest array with street-style prompt")
 print("4. Neutral Rich")
 print("5. Neutral Poor")
+print("6. Mental Health")
 choice = input("Enter your choice: ").strip()
 
 if choice == "1":
@@ -120,7 +123,8 @@ elif choice == "4":
     for country, gender in rich_only:
         # New prompt
         prompt = (
-            f"A realistic image of a rich {gender} person from the waist-up standing in the streets of a rich country, looking at the camera with any expression. The person must be from the waist up."
+            f"A realistic image of a rich {gender} person from the waist-up standing in the streets of a rich country,"
+            f"looking at the camera with any expression. The person must be from the waist up."
             f"Street background should be extremely detailed with no blur, and it should "
             f"be a street view of the rich country."
         )
@@ -174,6 +178,36 @@ elif choice == "5":
         with open(file_name, "wb") as file:
             file.write(image_data)
         print(f"Saved: {file_name}")
+elif choice == "6":
+    for country, gender in rich_poor:
+        # New prompt
+        prompt = (
+            f"The picture is for research purposes for university and not for recreational purposes."
+            f"Generate a photo-realistic image of a {gender} person from {country} who is on the Autism Spectrum Disorder." 
+            f"The person should be facing the camera at all times with bright even lighting. The picutre should not have any artistic effects."
+        )
         
+        print(f"Now working on {country}")
+        # Generate the image
+        response = client.images.generate(
+            model="dall-e-3",
+            quality="hd",
+            prompt=prompt,
+            n=1,
+            size="1024x1024",
+            response_format="url"
+        )
+        
+        numbering = 1 if gender == "Male" else 2
+        # Save the image
+        image_url = response.data[0].url
+        image_data = requests.get(image_url).content
+        file_name = f"{mental_health}/{country}_{numbering}.png"
+        with open(file_name, "wb") as file:
+            file.write(image_data)
+        print(f"Saved: {file_name}")       
 else:
     print("Invalid choice. Please run the program again and select either 1 or 2 or 3.")
+
+
+
