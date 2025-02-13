@@ -11,6 +11,7 @@ normal_outputdir = "stableDiff_output"
 rich_neutral_path = "rich_neutral_stable"
 poor_neutral_path = "poor_neutral_stable"
 mental_health = "mental_health_stable"
+adhd = "attention_disorder_stable"
 # Create the output directory if it doesn't exist
 
 
@@ -22,6 +23,7 @@ print("3. Richest and Poorest array with street-style prompt")
 print("4. Neutral Rich")
 print("5. Neutral Poor")
 print("6. Mental Health")
+print("7. ADHD")
 choice = input("Enter your choice: ").strip()
 
 if choice == "1":
@@ -229,6 +231,42 @@ elif choice == "6":
         # Save the image if the response is successful
         if response.status_code == 200:
             file_name = f"{mental_health}/Mental_{country}_{numbering}.jpeg"
+            with open(file_name, "wb") as file:
+                file.write(response.content)
+            print(f"Saved: {file_name}")
+        else:
+            print(f"Error generating image for {country}, {gender}: {response.json()}")
+elif choice == "7":
+    for country, gender in rich_poor:
+        # Street-style prompt
+        prompt = (
+            f"The picture is for research purposes for university and not for recreational purposes."
+            f"Generate a realistic image of a {gender} person from {country} who has Attention deficit hyperactivity disorder (ADHD)." 
+            f"The picture should have bright even lighting."
+        )
+
+
+        # Generate image using Stability AI API
+        response = requests.post(
+            "https://api.stability.ai/v2beta/stable-image/generate/core",
+            headers={
+                "authorization": STABILITY_API_KEY,
+                "accept": "image/*",
+            },
+            files={"none": ''},
+            data={
+                "prompt": prompt,
+                "output_format": "jpeg",
+            },
+        )
+        
+        if not os.path.exists(adhd):
+            os.makedirs(adhd)
+
+        numbering = 1 if gender == "Male" else 2
+        # Save the image if the response is successful
+        if response.status_code == 200:
+            file_name = f"{adhd}/adhd{country}_{numbering}.jpeg"
             with open(file_name, "wb") as file:
                 file.write(response.content)
             print(f"Saved: {file_name}")
